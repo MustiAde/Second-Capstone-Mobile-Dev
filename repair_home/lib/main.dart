@@ -1,18 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:repair_home/src/pages/login_screen.dart';
 
-
-class SignUpPage extends StatefulWidget {
-  const SignUpPage({ Key? key }) : super(key: key);
-
-  @override
-  State<SignUpPage> createState() => _SignUpPageState();
+void main() {
+  runApp(const MaterialApp(
+    home: MyApp(),
+    debugShowCheckedModeBanner: false,
+  ));
 }
 
-class _SignUpPageState extends State<SignUpPage> {
+class MyApp extends StatelessWidget {
+  const MyApp({Key? key}) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
-    return Container(
-      
-    );
+    return LoginPage();
   }
 }
