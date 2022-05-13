@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:repair_home/src/screens/home/home_screen.dart';
 import 'package:repair_home/src/shared/constants.dart';
+import 'package:repair_home/src/shared/widgets.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({Key? key}) : super(key: key);
@@ -12,7 +14,7 @@ class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xffeeedf3),
+      backgroundColor: lightWhite,
       body: Container(
           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 32.0),
           child: Stack(
@@ -68,23 +70,21 @@ class _SignupPageState extends State<SignupPage> {
                   ),
                   ElevatedButton(
                     onPressed: () {
-                      // Navigator.push(
-                      //   context,
-                      //   MaterialPageRoute(
-                      //     builder: ((context) => const HomeScreen()),
-                      //   ),
-                      // );
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: ((context) => const HomeScreen()),
+                        ),
+                      );
                     },
                     child: const Text(
                       'Sign up',
                       style: TextStyle(color: Colors.white),
                     ),
                     style: ButtonStyle(
-                      backgroundColor:
-                          MaterialStateProperty.all(const Color(0xff1F319D)),
+                      backgroundColor: MaterialStateProperty.all(blueBlue),
                       elevation: MaterialStateProperty.all(5.0),
-                      shadowColor:
-                          MaterialStateProperty.all(const Color(0xff1F319D)),
+                      shadowColor: MaterialStateProperty.all(blueBlue),
                     ),
                   ),
                   const SizedBox(
@@ -93,7 +93,7 @@ class _SignupPageState extends State<SignupPage> {
                   Text(
                     '• Or sign up with -',
                     style: TextStyle(
-                      color: Colors.grey.shade500,
+                      color: textColor2,
                       fontWeight: FontWeight.w500,
                     ),
                   ),
