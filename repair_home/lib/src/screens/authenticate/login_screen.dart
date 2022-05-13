@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:repair_home/src/screens/splashscreen.dart';
 import 'package:repair_home/src/shared/constants.dart';
 
 class LoginPage extends StatefulWidget {
@@ -21,7 +22,16 @@ class _LoginPageState extends State<LoginPage> {
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  Image.asset('assets/white_logo.png'),
+                  InkWell(
+                      onTap: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                            builder: ((context) => const LoadingScreen()),
+                          ),
+                        );
+                      },
+                      child: Image.asset('assets/white_logo.png')),
                   const SizedBox(
                     height: 30.0,
                   ),
@@ -30,7 +40,7 @@ class _LoginPageState extends State<LoginPage> {
                     child: const Text(
                       'Login to your account',
                       style: TextStyle(
-                          fontSize: 16.0, fontWeight: FontWeight.w500),
+                          fontSize: 16.0, fontWeight: FontWeight.bold),
                     ),
                   ),
                   const SizedBox(
@@ -53,8 +63,18 @@ class _LoginPageState extends State<LoginPage> {
                             inputTextDecoration.copyWith(hintText: 'Password'),
                         obscureText: true),
                   ),
+                  const SizedBox(
+                    height: 20.0,
+                  ),
                   ElevatedButton(
-                    onPressed: () {},
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: ((context) => const LoadingScreen()),
+                        ),
+                      );
+                    },
                     child: const Text(
                       'Sign in',
                       style: TextStyle(color: Colors.white),
@@ -65,9 +85,6 @@ class _LoginPageState extends State<LoginPage> {
                       elevation: MaterialStateProperty.all(5.0),
                       shadowColor:
                           MaterialStateProperty.all(const Color(0xff1F319D)),
-                      // padding: MaterialStateProperty.all(
-                      //     const EdgeInsets.symmetric(
-                      //         vertical: 10.0, horizontal: 120.0)),
                     ),
                   ),
                   const SizedBox(
@@ -92,7 +109,12 @@ class _LoginPageState extends State<LoginPage> {
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10)),
-                        child: Image.asset('assets/google.png'),
+                        child: InkWell(
+                          onTap: () {
+                            print('google');
+                          },
+                          child: Image.asset('assets/google.png'),
+                        ),
                       ),
                       Container(
                         padding: const EdgeInsets.symmetric(
@@ -100,7 +122,12 @@ class _LoginPageState extends State<LoginPage> {
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10)),
-                        child: Image.asset('assets/facebook.png'),
+                        child: InkWell(
+                          onTap: () {
+                            print('facebook');
+                          },
+                          child: Image.asset('assets/facebook.png'),
+                        ),
                       ),
                       Container(
                         padding: const EdgeInsets.symmetric(
@@ -108,19 +135,42 @@ class _LoginPageState extends State<LoginPage> {
                         decoration: BoxDecoration(
                             color: Colors.white,
                             borderRadius: BorderRadius.circular(10)),
-                        child: Image.asset('assets/twitter.png'),
+                        child: InkWell(
+                          onTap: () {
+                            print('twitter');
+                          },
+                          child: Image.asset('assets/twitter.png'),
+                        ),
                       ),
                     ],
                   ),
                   const SizedBox(
                     height: 20.0,
                   ),
-                  Text(
-                    '• Don\'t have an account? Sigh up',
-                    style: TextStyle(
-                      color: Colors.grey.shade500,
-                      fontWeight: FontWeight.w500,
-                    ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Text(
+                        '• Don\'t have an account? ',
+                        style: TextStyle(
+                          color: Colors.grey.shade500,
+                          fontWeight: FontWeight.w500,
+                        ),
+                      ),
+                      InkWell(
+                        onTap: () {
+                          print('sign up');
+                        },
+                        hoverColor: Colors.transparent,
+                        child: const Text(
+                          'Sign up',
+                          style: TextStyle(
+                            color: Color.fromARGB(255, 167, 171, 250),
+                            fontWeight: FontWeight.w500,
+                          ),
+                        ),
+                      ),
+                    ],
                   ),
                 ],
               ),
