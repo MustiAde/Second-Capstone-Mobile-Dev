@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:repair_home/src/screens/authenticate/signup_screen.dart';
 import 'package:repair_home/src/screens/splashscreen.dart';
 import 'package:repair_home/src/shared/constants.dart';
 
@@ -71,7 +72,7 @@ class _LoginPageState extends State<LoginPage> {
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: ((context) => const LoadingScreen()),
+                          builder: ((context) => const SignupPage()),
                         ),
                       );
                     },
@@ -91,7 +92,7 @@ class _LoginPageState extends State<LoginPage> {
                     height: 20.0,
                   ),
                   Text(
-                    '• Or sign in with •',
+                    '• Or sign in with -',
                     style: TextStyle(
                       color: Colors.grey.shade500,
                       fontWeight: FontWeight.w500,
