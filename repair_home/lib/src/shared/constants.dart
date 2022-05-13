@@ -1,25 +1,13 @@
 import 'package:flutter/material.dart';
 
-var customBoxDecor = BoxDecoration(
-  color: Colors.white,
-  borderRadius: BorderRadius.circular(10.0),
-  boxShadow: [
-    BoxShadow(
-      color: Colors.grey.shade400,
-      blurRadius: 3.0,
-      spreadRadius: 3.0,
-      offset: const Offset(3, 5),
-    )
-  ],
-);
+const priColor1 = Color(0xFFCAE8F2);
+const priColor2 = Color(0xFFD1D3FA);
+const priColor3 = Color(0xFFD6E3FF);
+const lightWhite = Color(0xFFEEEDF3);
+const bBlack = Color(0xFF1B1B1D);
+const lightRed = Color(0xFFF3B29E);
+const lightAsh = Color(0xFFD3D3D3);
+const blueBlue = Color(0xFF1F319D);
 
-var inputTextDecoration = InputDecoration(
-  hintStyle: TextStyle(
-    color: Colors.grey.shade500,
-    fontWeight: FontWeight.w500,
-  ),
-  fillColor: Colors.white,
-  enabledBorder: InputBorder.none,
-  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
-  disabledBorder: InputBorder.none,
-);
+const textColor1 = Color(0xFFEFEFEF);
+const textColor2 = Color(0xFFC4C4C4);
