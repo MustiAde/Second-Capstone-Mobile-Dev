@@ -23,7 +23,10 @@ var inputTextDecoration = InputDecoration(
   fillColor: Colors.white,
   focusColor: Colors.white,
   hoverColor: Colors.white,
-  enabledBorder: OutlineInputBorder(borderSide: BorderSide.none),
-  border: OutlineInputBorder(borderRadius: BorderRadius.circular(10.0)),
-  disabledBorder: OutlineInputBorder(borderSide: BorderSide.none),
+  focusedBorder: OutlineInputBorder(
+      borderSide: BorderSide(color: Colors.grey.shade500),
+      borderRadius: BorderRadius.circular(10.0)),
+  border: OutlineInputBorder(
+      borderSide: BorderSide(color: Colors.grey.shade500),
+      borderRadius: BorderRadius.circular(10.0)),
 );
