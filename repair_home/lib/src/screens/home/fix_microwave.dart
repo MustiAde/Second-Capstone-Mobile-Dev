@@ -82,10 +82,8 @@ class _MicrowaveState extends State<Microwave> {
                   ),
                   InkWell(
                     onTap: (() {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const Cart()));
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Cart()));
                     }),
                     child: Container(
                       padding:
@@ -106,10 +104,8 @@ class _MicrowaveState extends State<Microwave> {
                   ),
                   InkWell(
                     onTap: (() {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => const Cart()));
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => Cart()));
                     }),
                     child: Container(
                       padding:

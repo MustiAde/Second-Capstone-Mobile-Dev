@@ -17,7 +17,7 @@ class _HomeScreenState extends State<HomeScreen> {
       backgroundColor: lightWhite,
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor: Colors.white,
+        backgroundColor: lightWhite,
         leading: const Icon(Icons.menu, color: bBlack),
         actions: const [
           Padding(
@@ -64,7 +64,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           fontSize: 14.0, fontWeight: FontWeight.bold),
                     ),
                     const SizedBox(
-                      height: 10.0,
+                      height: 5.0,
                     ),
                   ],
                 ),
@@ -84,7 +84,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const SizedBox(
-                      height: 10.0,
+                      height: 5.0,
                     ),
                     const Text(
                       'We can fix it',

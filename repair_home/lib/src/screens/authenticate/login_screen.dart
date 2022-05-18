@@ -18,7 +18,8 @@ class _LoginPageState extends State<LoginPage> {
       backgroundColor: lightWhite,
       body: SingleChildScrollView(
         child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 32.0),
+            padding:
+                const EdgeInsets.symmetric(vertical: 8.0, horizontal: 32.0),
             child: Stack(
               children: [
                 // Image.asset('assets/blue_logo.png'),
@@ -62,8 +63,8 @@ class _LoginPageState extends State<LoginPage> {
                     Container(
                       decoration: customBoxDecor,
                       child: TextFormField(
-                          decoration:
-                              inputTextDecoration.copyWith(hintText: 'Password'),
+                          decoration: inputTextDecoration.copyWith(
+                              hintText: 'Password'),
                           obscureText: true),
                     ),
                     const SizedBox(
@@ -89,9 +90,11 @@ class _LoginPageState extends State<LoginPage> {
                                 style: TextStyle(color: Colors.white),
                               ),
                               style: ButtonStyle(
-                                backgroundColor: MaterialStateProperty.all(blueBlue),
+                                backgroundColor:
+                                    MaterialStateProperty.all(blueBlue),
                                 elevation: MaterialStateProperty.all(7.0),
-                                shadowColor: MaterialStateProperty.all(blueBlue),
+                                shadowColor:
+                                    MaterialStateProperty.all(blueBlue),
                               ),
                             ),
                           ),
@@ -170,7 +173,12 @@ class _LoginPageState extends State<LoginPage> {
                         ),
                         InkWell(
                           onTap: () {
-                            print('sign up');
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                builder: ((context) => const LoadingScreen()),
+                              ),
+                            );
                           },
                           hoverColor: Colors.transparent,
                           child: const Text(
