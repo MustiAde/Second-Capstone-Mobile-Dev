@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:repair_home/src/screens/home/cart_screen.dart';
 import 'package:repair_home/src/shared/constants.dart';
 
 var customBoxDecor = BoxDecoration(
@@ -50,7 +51,13 @@ class CartTiles extends StatelessWidget {
       children: [
         InkWell(
           onTap: () {
-            print('expand $name widget');
+            ListView.builder(
+              itemBuilder: (context, index) {
+                return CartSubTiles(
+                    name: name, price: Cart.cartSubTilesList[index].price);
+              },
+              itemCount: 2,
+            );
           },
           child: Container(
             padding: const EdgeInsets.symmetric(vertical: 4.0, horizontal: 8.0),
@@ -116,3 +123,73 @@ class CartTiles extends StatelessWidget {
     );
   }
 }
+
+class CartSubTiles extends StatelessWidget {
+  const CartSubTiles({
+    Key? key,
+    required this.name,
+    required this.price,
+  }) : super(key: key);
+
+  final String name;
+  final double price;
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      itemBuilder: (context, index) {
+        return subItem;
+      },
+      itemCount: Cart.cartSubTilesList.length,
+    );
+  }
+}
+
+var subItem = Column(
+  children: [
+    Container(
+      padding: const EdgeInsets.all(8.0),
+      decoration: BoxDecoration(
+        color: priColor3,
+        borderRadius: BorderRadius.circular(3.0),
+      ),
+      child: Row(
+        children: [
+          Expanded(
+            flex: 1,
+            child: Container(
+              padding: const EdgeInsets.all(4.0),
+              decoration: BoxDecoration(
+                color: lightRed,
+                borderRadius: BorderRadius.circular(25.0),
+              ),
+              child: const Icon(
+                Icons.remove,
+                color: white,
+                size: 12.0,
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 8,
+            child: Padding(
+              padding: const EdgeInsets.fromLTRB(20.0, 0.0, 0.0, 0.0),
+              child: Text(
+                '$CartSubTiles.name',
+                style: const TextStyle(
+                    fontWeight: FontWeight.bold, fontSize: 12.0),
+              ),
+            ),
+          ),
+          Expanded(
+            flex: 2,
+            child: Text('$CartSubTiles.price'),
+          ),
+        ],
+      ),
+    ),
+    const SizedBox(
+      height: 2.0,
+    ),
+  ],
+);

@@ -3,18 +3,10 @@ import 'package:repair_home/src/shared/constants.dart';
 import 'package:repair_home/src/shared/widgets.dart';
 
 class Cart extends StatefulWidget {
-  Cart({
-    Key? key,
-    // required this.icon,
-    // required this.name,
-    // required this.service,
-    // required this.price
-  }) : super(key: key);
+  static var cartTilesList;
+  static var cartSubTilesList;
 
-  // final String? icon;
-  // final String? name;
-  // final String? service;
-  // final int? price;
+  const Cart({Key? key}) : super(key: key);
 
   @override
   State<Cart> createState() => _CartState();
@@ -28,6 +20,17 @@ class _CartState extends State<Cart> {
     const CartTiles(name: 'Washer', icon: 'washer', service: '1', price: 135),
     const CartTiles(
         name: 'Computer', icon: 'computer', service: '1', price: 30),
+  ];
+
+  final List cartSubTilesList = [
+    const CartSubTiles(
+      name: 'Set up Microwave',
+      price: 22,
+    ),
+    const CartSubTiles(
+      name: ' Repair Microwave',
+      price: 80,
+    ),
   ];
 
   @override
