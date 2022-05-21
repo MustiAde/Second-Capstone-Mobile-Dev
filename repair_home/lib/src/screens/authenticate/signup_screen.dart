@@ -14,10 +14,11 @@ class _SignupPageState extends State<SignupPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: lightWhite,
+      backgroundColor: backgroundMain,
       body: SingleChildScrollView(
         child: Container(
-            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 32.0),
+            padding:
+                const EdgeInsets.symmetric(vertical: 8.0, horizontal: 32.0),
             child: Stack(
               children: [
                 // Image.asset('assets/blue_logo.png'),
@@ -33,7 +34,9 @@ class _SignupPageState extends State<SignupPage> {
                       child: const Text(
                         'Create new account',
                         style: TextStyle(
-                            fontSize: 16.0, fontWeight: FontWeight.bold),
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.bold,
+                            color: bBlack),
                       ),
                     ),
                     const SizedBox(
@@ -52,8 +55,8 @@ class _SignupPageState extends State<SignupPage> {
                     Container(
                       decoration: customBoxDecor,
                       child: TextFormField(
-                          decoration:
-                              inputTextDecoration.copyWith(hintText: 'Password'),
+                          decoration: inputTextDecoration.copyWith(
+                              hintText: 'Password'),
                           obscureText: true),
                     ),
                     const SizedBox(
@@ -69,42 +72,51 @@ class _SignupPageState extends State<SignupPage> {
                     const SizedBox(
                       height: 20.0,
                     ),
-                      Row(
-                        children: [
-                          Expanded(
-                            flex: 1,
-                            child: SizedBox(
-                              height: 50.0,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: ((context) => const HomeScreen()),
-                                    ),
-                                  );
-                                },
-                                child: const Text(
-                                  'Sign up',
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                style: ButtonStyle(
-                                  backgroundColor: MaterialStateProperty.all(blueBlue),
-                                  elevation: MaterialStateProperty.all(7.0),
-                                  shadowColor: MaterialStateProperty.all(blueBlue),
-                                ),
+                    Row(
+                      children: [
+                        Expanded(
+                          flex: 1,
+                          child: Container(
+                            height: 50.0,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5.0),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: blueBlue,
+                                  blurRadius: 3.0,
+                                  offset: Offset(3, 2),
+                                )
+                              ],
+                            ),
+                            child: TextButton(
+                              onPressed: () {
+                                Navigator.push(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: ((context) => HomeScreen()),
+                                  ),
+                                );
+                              },
+                              child: const Text(
+                                'Sign up',
+                                style: TextStyle(color: lightWhite),
+                              ),
+                              style: ButtonStyle(
+                                backgroundColor:
+                                    MaterialStateProperty.all(blueBlue),
                               ),
                             ),
                           ),
-                        ],
-                      ),
+                        ),
+                      ],
+                    ),
                     const SizedBox(
                       height: 50.0,
                     ),
                     const Text(
                       '• Or sign up with -',
                       style: TextStyle(
-                        color: textColor2,
+                        color: bBlackHalf,
                         fontWeight: FontWeight.w500,
                       ),
                     ),

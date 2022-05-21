@@ -15,7 +15,7 @@ class _LoginPageState extends State<LoginPage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: lightWhite,
+      backgroundColor: backgroundMain,
       body: SingleChildScrollView(
         child: Container(
             padding:
@@ -26,16 +26,7 @@ class _LoginPageState extends State<LoginPage> {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    InkWell(
-                        onTap: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: ((context) => const LoadingScreen()),
-                            ),
-                          );
-                        },
-                        child: Image.asset('assets/white_logo.png')),
+                    Image.asset('assets/white_logo.png'),
                     const SizedBox(
                       height: 30.0,
                     ),
@@ -44,7 +35,9 @@ class _LoginPageState extends State<LoginPage> {
                       child: const Text(
                         'Login to your account',
                         style: TextStyle(
-                            fontSize: 16.0, fontWeight: FontWeight.bold),
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.bold,
+                            color: bBlack),
                       ),
                     ),
                     const SizedBox(
@@ -74,9 +67,19 @@ class _LoginPageState extends State<LoginPage> {
                       children: [
                         Expanded(
                           flex: 1,
-                          child: SizedBox(
+                          child: Container(
                             height: 50.0,
-                            child: ElevatedButton(
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(5.0),
+                              boxShadow: const [
+                                BoxShadow(
+                                  color: blueBlue,
+                                  blurRadius: 3.0,
+                                  offset: Offset(3, 2),
+                                )
+                              ],
+                            ),
+                            child: TextButton(
                               onPressed: () {
                                 Navigator.push(
                                   context,
@@ -87,13 +90,10 @@ class _LoginPageState extends State<LoginPage> {
                               },
                               child: const Text(
                                 'Sign in',
-                                style: TextStyle(color: Colors.white),
+                                style: TextStyle(color: lightWhite),
                               ),
                               style: ButtonStyle(
                                 backgroundColor:
-                                    MaterialStateProperty.all(blueBlue),
-                                elevation: MaterialStateProperty.all(7.0),
-                                shadowColor:
                                     MaterialStateProperty.all(blueBlue),
                               ),
                             ),
@@ -107,7 +107,7 @@ class _LoginPageState extends State<LoginPage> {
                     const Text(
                       '• Or sign in with -',
                       style: TextStyle(
-                        color: textColor2,
+                        color: bBlackHalf,
                         fontWeight: FontWeight.w500,
                       ),
                     ),
@@ -167,7 +167,7 @@ class _LoginPageState extends State<LoginPage> {
                         const Text(
                           '• Don\'t have an account? ',
                           style: TextStyle(
-                            color: textColor2,
+                            color: bBlackHalf,
                             fontWeight: FontWeight.w500,
                           ),
                         ),
@@ -184,7 +184,7 @@ class _LoginPageState extends State<LoginPage> {
                           child: const Text(
                             'Sign up',
                             style: TextStyle(
-                              color: priColor2,
+                              color: textLink,
                               fontWeight: FontWeight.w500,
                             ),
                           ),

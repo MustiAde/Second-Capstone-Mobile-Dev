@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:repair_home/src/screens/home/cart_screen.dart';
+import 'package:repair_home/src/screens/home/fix_microwave.dart';
 import 'package:repair_home/src/shared/constants.dart';
 
 var customBoxDecor = BoxDecoration(
@@ -7,17 +8,16 @@ var customBoxDecor = BoxDecoration(
   borderRadius: BorderRadius.circular(10.0),
   boxShadow: const [
     BoxShadow(
-      color: lightAsh,
+      color: textFieldShadow,
       blurRadius: 3.0,
-      spreadRadius: 3.0,
-      offset: Offset(3, 5),
+      offset: Offset(6, 4),
     )
   ],
 );
 
 var inputTextDecoration = InputDecoration(
   hintStyle: const TextStyle(
-    color: textColor2,
+    color: bBlackHalf,
     fontWeight: FontWeight.w500,
   ),
   filled: true,
@@ -193,3 +193,89 @@ var subItem = Column(
     ),
   ],
 );
+
+class HomeTiles extends StatelessWidget {
+  const HomeTiles(
+      {Key? key,
+      required this.icon,
+      required this.name,
+      required this.location})
+      : super(key: key);
+
+  final String icon;
+  final String name;
+  final String location;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      children: [
+        InkWell(
+          onTap: () {
+            Navigator.push(
+                context,
+                MaterialPageRoute(
+                  builder: (context) => const Microwave(),
+                ));
+          },
+          child: Container(
+            padding: const EdgeInsets.all(8.0),
+            decoration: BoxDecoration(
+              color: priColor3,
+              borderRadius: BorderRadius.circular(10.0),
+            ),
+            child: Row(
+              children: [
+                Expanded(
+                  flex: 1,
+                  child: Container(
+                    height: 30.0,
+                    padding: const EdgeInsets.symmetric(vertical: 4.0),
+                    decoration: BoxDecoration(
+                      color: iconBox,
+                      borderRadius: BorderRadius.circular(5.0),
+                    ),
+                    child: Image.asset('assets/icons/$icon.png', scale: 1.4),
+                  ),
+                ),
+                Expanded(
+                  flex: 8,
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(20.0, 0.0, 0.0, 0.0),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Text(
+                          'Fix $name',
+                          style: const TextStyle(
+                              fontWeight: FontWeight.bold, fontSize: 12.0, color: Colors.black),
+                        ),
+                        Text(
+                          location,
+                          style: const TextStyle(
+                              color: bBlackHalf, fontSize: 12.0),
+                        ),
+                      ],
+                    ),
+                  ),
+                ),
+                const Expanded(
+                  flex: 1,
+                  child: Icon(
+                    Icons.arrow_forward_ios,
+                    size: 18.0,
+                    color: bBlack,
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ),
+        const SizedBox(
+          height: 10.0,
+        ),
+      ],
+    );
+  }
+}

@@ -4,6 +4,8 @@ import 'package:repair_home/src/shared/constants.dart';
 import 'package:repair_home/src/shared/widgets.dart';
 
 class HomeScreen extends StatefulWidget {
+  static var homeTilesList;
+
   const HomeScreen({Key? key}) : super(key: key);
 
   @override
@@ -11,20 +13,25 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  final List homeTilesList = [
+    const HomeTiles(icon: 'microwave', name: 'Microwave', location: 'Kitchen'),
+    const HomeTiles(icon: 'tv', name: 'TV set', location: 'Living room'),
+  ];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: lightWhite,
+      backgroundColor: backgroundMain,
       appBar: AppBar(
         elevation: 0.0,
-        backgroundColor: lightWhite,
-        leading: const Icon(Icons.menu, color: bBlack),
+        backgroundColor: Colors.transparent,
+        leading: const Icon(Icons.menu, color: Colors.black),
         actions: const [
           Padding(
             padding: EdgeInsets.all(8.0),
             child: Icon(
               Icons.shopping_cart_outlined,
-              color: bBlack,
+              color: Colors.black,
               size: 18.0,
             ),
           ),
@@ -44,16 +51,42 @@ class _HomeScreenState extends State<HomeScreen> {
                     const Text(
                       'What\'s broken?',
                       style: TextStyle(
-                          fontSize: 16.0, fontWeight: FontWeight.bold),
+                          fontSize: 16.0,
+                          fontWeight: FontWeight.bold,
+                          color: bBlack),
                     ),
                     const SizedBox(
                       height: 10.0,
                     ),
-                    TextField(
-                      decoration: inputTextDecoration.copyWith(
+                    Container(
+                      decoration: BoxDecoration(
+                        border: Border.all(
+                          width: 1.0,
+                          color: lightAsh,
+                        ),
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      child: TextField(
+                        decoration: InputDecoration(
                           hintText: 'Search appliances',
-                          suffixIcon: Icon(Icons.screen_search_desktop_outlined,
-                              color: Colors.grey.shade500)),
+                          hintStyle: const TextStyle(
+                            color: lightAsh,
+                            fontWeight: FontWeight.w500,
+                          ),
+                          suffixIcon: Image.asset(
+                            'assets/icons/search_icon.png',
+                            color: lightAsh,
+                            scale: 1.3,
+                          ),
+                          filled: true,
+                          fillColor: Colors.white,
+                          focusColor: Colors.white,
+                          hoverColor: Colors.white,
+                          border: OutlineInputBorder(
+                              borderSide: BorderSide.none,
+                              borderRadius: BorderRadius.circular(10.0)),
+                        ),
+                      ),
                     ),
                     const SizedBox(
                       height: 10.0,
@@ -61,7 +94,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     const Text(
                       'Offers',
                       style: TextStyle(
-                          fontSize: 14.0, fontWeight: FontWeight.bold),
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.bold,
+                          color: bBlack),
                     ),
                     const SizedBox(
                       height: 5.0,
@@ -73,8 +108,8 @@ class _HomeScreenState extends State<HomeScreen> {
                 scrollDirection: Axis.horizontal,
                 child: Row(
                   children: [
-                    Image.asset('assets/idek_man.png'),
-                    Image.asset('assets/idek_man2.png'),
+                    Image.asset('assets/idek_man.png', scale: 1.2),
+                    Image.asset('assets/idek_man2.png', scale: 1.2),
                   ],
                 ),
               ),
@@ -89,7 +124,9 @@ class _HomeScreenState extends State<HomeScreen> {
                     const Text(
                       'We can fix it',
                       style: TextStyle(
-                          fontSize: 14.0, fontWeight: FontWeight.bold),
+                          fontSize: 14.0,
+                          fontWeight: FontWeight.bold,
+                          color: bBlack),
                     ),
                     const SizedBox(
                       height: 10.0,
@@ -107,7 +144,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: const Text(
                             'Offers',
                             style: TextStyle(
-                                color: Colors.white,
+                                color: text1,
                                 fontSize: 14.0,
                                 fontWeight: FontWeight.bold),
                           ),
@@ -115,21 +152,21 @@ class _HomeScreenState extends State<HomeScreen> {
                         const Text(
                           'Kitchen',
                           style: TextStyle(
-                              color: textColor2,
+                              color: text2,
                               fontSize: 14.0,
                               fontWeight: FontWeight.w500),
                         ),
                         const Text(
                           'Livingroom',
                           style: TextStyle(
-                              color: textColor2,
+                              color: text2,
                               fontSize: 14.0,
                               fontWeight: FontWeight.w500),
                         ),
                         const Text(
                           'Bathroom',
                           style: TextStyle(
-                              color: textColor2,
+                              color: text2,
                               fontSize: 14.0,
                               fontWeight: FontWeight.w500),
                         ),
@@ -138,131 +175,16 @@ class _HomeScreenState extends State<HomeScreen> {
                     const SizedBox(
                       height: 10.0,
                     ),
-                    InkWell(
-                      onTap: () {
-                        Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: (context) => const Microwave(),
-                            ));
+                    ListView.builder(
+                      scrollDirection: Axis.vertical,
+                      shrinkWrap: true,
+                      itemBuilder: (context, index) {
+                        return HomeTiles(
+                            icon: homeTilesList[index].icon,
+                            name: homeTilesList[index].name,
+                            location: homeTilesList[index].location);
                       },
-                      child: Container(
-                        padding: const EdgeInsets.all(8.0),
-                        decoration: BoxDecoration(
-                          color: priColor3,
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: Row(
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: Container(
-                                  padding:
-                                      const EdgeInsets.symmetric(vertical: 4.0),
-                                  decoration: BoxDecoration(
-                                    color: priColor2,
-                                    borderRadius: BorderRadius.circular(10.0),
-                                  ),
-                                  child: const Icon(
-                                    Icons.microwave,
-                                    color: Colors.white,
-                                  )),
-                            ),
-                            Expanded(
-                              flex: 8,
-                              child: Padding(
-                                padding: const EdgeInsets.fromLTRB(
-                                    20.0, 0.0, 0.0, 0.0),
-                                child: Column(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: const [
-                                    Text(
-                                      'Fix Microwave',
-                                      style: TextStyle(
-                                          fontWeight: FontWeight.bold,
-                                          fontSize: 12.0),
-                                    ),
-                                    Text(
-                                      'Kitchen',
-                                      style: TextStyle(
-                                          color: textColor2, fontSize: 12.0),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ),
-                            const Expanded(
-                              flex: 1,
-                              child: Icon(
-                                Icons.arrow_forward_ios,
-                                size: 18.0,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                    ),
-                    const SizedBox(
-                      height: 10.0,
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(8.0),
-                      decoration: BoxDecoration(
-                        color: priColor3,
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      child: Row(
-                        children: [
-                          Expanded(
-                            flex: 1,
-                            child: Container(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 4.0),
-                                decoration: BoxDecoration(
-                                  color: priColor2,
-                                  borderRadius: BorderRadius.circular(10.0),
-                                ),
-                                child: const Icon(
-                                  Icons.tv,
-                                  color: Colors.white,
-                                )),
-                          ),
-                          Expanded(
-                            flex: 8,
-                            child: Padding(
-                              padding: const EdgeInsets.fromLTRB(
-                                  20.0, 0.0, 0.0, 0.0),
-                              child: Column(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: const [
-                                  Text(
-                                    'Fix TV set',
-                                    style: TextStyle(
-                                        fontWeight: FontWeight.bold,
-                                        fontSize: 12.0),
-                                  ),
-                                  Text(
-                                    'Living room',
-                                    style: TextStyle(
-                                        color: textColor2, fontSize: 12.0),
-                                  ),
-                                ],
-                              ),
-                            ),
-                          ),
-                          const Expanded(
-                            flex: 1,
-                            child: Icon(
-                              Icons.arrow_forward_ios,
-                              size: 18.0,
-                            ),
-                          ),
-                        ],
-                      ),
+                      itemCount: homeTilesList.length,
                     ),
                   ],
                 ),

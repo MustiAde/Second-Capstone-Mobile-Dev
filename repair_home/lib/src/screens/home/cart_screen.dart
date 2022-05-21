@@ -36,21 +36,28 @@ class _CartState extends State<Cart> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: lightWhite,
+      backgroundColor: backgroundMain,
       appBar: AppBar(
-        leading: const Icon(
-          Icons.arrow_back_ios,
-          size: 16.0,
-          color: Colors.black,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          iconSize: 16.0,
+          color: bBlack,
+          hoverColor: Colors.transparent,
         ),
         elevation: 0.0,
         title: const Text(
           'Cart',
           style: TextStyle(
-              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16.0),
+            color: bBlack,
+            fontWeight: FontWeight.bold,
+            fontSize: 16.0,
+          ),
         ),
         centerTitle: true,
-        backgroundColor: lightWhite,
+        backgroundColor: Colors.transparent,
       ),
       body: SafeArea(
         child: Padding(
@@ -81,12 +88,17 @@ class _CartState extends State<Cart> {
                       children: const [
                         Expanded(
                           flex: 3,
-                          child: Text('Total price'),
+                          child: Text(
+                            'Total price',
+                            style: TextStyle(color: text2),
+                          ),
                         ),
                         Expanded(
                           flex: 1,
                           child: Text('\$302',
-                              style: TextStyle(fontWeight: FontWeight.bold)),
+                              style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black)),
                         ),
                       ],
                     ),
@@ -97,12 +109,12 @@ class _CartState extends State<Cart> {
                             padding: const EdgeInsets.all(10.0),
                             alignment: Alignment.center,
                             decoration: BoxDecoration(
-                              color: Colors.black,
+                              color: bBlack,
                               borderRadius: BorderRadius.circular(10.0),
                             ),
                             child: const Text(
                               'Make an order',
-                              style: TextStyle(color: Colors.white),
+                              style: TextStyle(color: text1),
                             ),
                           ),
                         ),
