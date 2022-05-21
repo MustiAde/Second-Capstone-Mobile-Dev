@@ -24,15 +24,20 @@ class _MicrowaveState extends State<Microwave> {
                 fontSize: 18.0)),
         elevation: 0.0,
         backgroundColor: lightRed,
+        centerTitle: true,
       ),
       body: Container(
         child: Column(
           children: [
             Container(
-              height: 300.0,
-              padding: const EdgeInsets.fromLTRB(8.0, 16.0, 8.0, 32.0),
               color: lightRed,
-              child: Image.asset('assets/microwave.png'),
+              height: MediaQuery.of(context).size.height * 0.4,
+              alignment: Alignment.topCenter,
+              padding: const EdgeInsets.only(top: 32.0,),
+              child: Image.asset(
+                'assets/microwave_big.png',
+                scale: 1.5,
+              ),
             ),
             const SizedBox(
               height: 10.0,
@@ -78,7 +83,7 @@ class _MicrowaveState extends State<Microwave> {
                     ],
                   ),
                   const SizedBox(
-                    height: 10.0,
+                    height: 20.0,
                   ),
                   InkWell(
                     onTap: (() {
@@ -100,7 +105,7 @@ class _MicrowaveState extends State<Microwave> {
                     ),
                   ),
                   const SizedBox(
-                    height: 10.0,
+                    height: 20.0,
                   ),
                   InkWell(
                     onTap: (() {
