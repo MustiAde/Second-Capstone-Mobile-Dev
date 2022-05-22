@@ -12,6 +12,8 @@ class Microwave extends StatefulWidget {
 class _MicrowaveState extends State<Microwave> {
   @override
   Widget build(BuildContext context) {
+    Size _size = MediaQuery.of(context).size;
+
     return Scaffold(
       backgroundColor: backgroundMain,
       appBar: AppBar(
@@ -31,144 +33,198 @@ class _MicrowaveState extends State<Microwave> {
         backgroundColor: lightRedHalf,
         centerTitle: true,
       ),
-      body: Column(
+      body: SafeArea(
+          child: Stack(
         children: [
-          Container(
-            height: MediaQuery.of(context).size.height * 0.4,
-            alignment: Alignment.topCenter,
-            padding: const EdgeInsets.only(
-              top: 32.0,
-            ),
-            decoration: const BoxDecoration(
-                color: lightRedHalf,
-                borderRadius: BorderRadius.only(
-                  bottomLeft: Radius.circular(10.0),
-                  bottomRight: Radius.circular(10.0),
-                )),
-            child: Image.asset(
-              'assets/microwave_big.png',
-              scale: 1.5,
-            ),
+          Image.asset(
+            'assets/watermarks/fix_logo.png',
+            height: _size.height * 0.35,
+            color: blueBlue.withOpacity(0.15),
           ),
-          const SizedBox(
-            height: 10.0,
+          _fixBody(_size),
+        ],
+      )),
+    );
+  }
+
+  Widget _fixBody(Size size) {
+    return Column(
+      children: [
+        Container(
+          height: MediaQuery.of(context).size.height * 0.4,
+          alignment: Alignment.topCenter,
+          padding: const EdgeInsets.only(
+            top: 32.0,
           ),
-          Container(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Expanded(
-                      flex: 4,
-                      child: Container(
-                        height: 40.0,
-                        alignment: Alignment.center,
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 10.0, horizontal: 20.0),
-                        decoration: BoxDecoration(
-                            color: lightRedHalf,
-                            border: Border.all(width: 0.5, color: lightAsh),
-                            borderRadius: BorderRadius.circular(10.0)),
-                        child: const Text(
-                          'Reviews',
-                          style: TextStyle(color: bBlack),
-                        ),
+          decoration: const BoxDecoration(
+              color: lightRedHalf,
+              borderRadius: BorderRadius.only(
+                bottomLeft: Radius.circular(10.0),
+                bottomRight: Radius.circular(10.0),
+              )),
+          child: Image.asset(
+            'assets/microwave_big.png',
+            scale: 1.5,
+          ),
+        ),
+        const SizedBox(
+          height: 10.0,
+        ),
+        Container(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    flex: 4,
+                    child: Container(
+                      height: 40.0,
+                      alignment: Alignment.center,
+                      padding: const EdgeInsets.symmetric(
+                          vertical: 10.0, horizontal: 20.0),
+                      decoration: BoxDecoration(
+                          color: lightRedHalf,
+                          border: Border.all(width: 0.5, color: lightAsh),
+                          borderRadius: BorderRadius.circular(10.0)),
+                      child: const Text(
+                        'Reviews',
+                        style: TextStyle(color: bBlack),
                       ),
                     ),
-                    const SizedBox(
-                      width: 10.0,
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Container(
-                          height: 40.0,
-                          padding: const EdgeInsets.symmetric(
-                              vertical: 10.0, horizontal: 15.0),
-                          decoration: BoxDecoration(
-                              color: bBlack,
-                              borderRadius: BorderRadius.circular(10.0)),
-                          child: Image.asset(
-                            'assets/icons/review.png',
-                            color: text1,
-                          )),
-                    ),
-                  ],
-                ),
-                const SizedBox(
-                  height: 20.0,
-                ),
-                InkWell(
-                  onTap: (() {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Cart()));
-                  }),
-                  child: Container(
-                    padding: const EdgeInsets.fromLTRB(15.0, 15.0, 30.0, 15.0),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10.0),
-                      border: Border.all(color: fixScreenBorder, width: 1),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
-                        Text(
-                          'Repair',
-                          style: TextStyle(
-                            color: Colors.black,
-                          ),
+                  ),
+                  const SizedBox(
+                    width: 10.0,
+                  ),
+                  Expanded(
+                    flex: 1,
+                    child: Container(
+                        height: 40.0,
+                        padding: const EdgeInsets.symmetric(
+                            vertical: 10.0, horizontal: 15.0),
+                        decoration: BoxDecoration(
+                            color: bBlack,
+                            borderRadius: BorderRadius.circular(10.0)),
+                        child: Image.asset(
+                          'assets/icons/review.png',
+                          color: text1,
+                        )),
+                  ),
+                ],
+              ),
+              const SizedBox(
+                height: 10.0,
+              ),
+              InkWell(
+                onTap: (() {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Cart()));
+                }),
+                child: Container(
+                  padding: const EdgeInsets.fromLTRB(15.0, 15.0, 30.0, 15.0),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10.0),
+                    border: Border.all(color: fixScreenBorder, width: 1),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const [
+                      Text(
+                        'Repair',
+                        style: TextStyle(
+                          color: Colors.black,
                         ),
-                        Text(
-                          '\$52',
-                          style: TextStyle(
-                            color: Colors.black,
-                          ),
-                        )
-                      ],
-                    ),
+                      ),
+                      Text(
+                        '\$52',
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      )
+                    ],
                   ),
                 ),
-                const SizedBox(
-                  height: 20.0,
-                ),
-                InkWell(
-                  onTap: (() {
-                    Navigator.push(context,
-                        MaterialPageRoute(builder: (context) => Cart()));
-                  }),
-                  child: Container(
-                    padding: const EdgeInsets.fromLTRB(15.0, 15.0, 30.0, 15.0),
-                    decoration: BoxDecoration(
-                      color: Colors.white,
-                      borderRadius: BorderRadius.circular(10.0),
-                      border: Border.all(color: fixScreenBorder, width: 1),
-                    ),
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: const [
-                        Text(
-                          'Setup',
-                          style: TextStyle(
-                            color: Colors.black,
-                          ),
+              ),
+              const SizedBox(
+                height: 10.0,
+              ),
+              InkWell(
+                onTap: (() {
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => Cart()));
+                }),
+                child: Container(
+                  padding: const EdgeInsets.fromLTRB(15.0, 15.0, 30.0, 15.0),
+                  decoration: BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.circular(10.0),
+                    border: Border.all(color: fixScreenBorder, width: 1),
+                  ),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: const [
+                      Text(
+                        'Setup',
+                        style: TextStyle(
+                          color: Colors.black,
                         ),
-                        Text(
-                          '\$12',
-                          style: TextStyle(
-                            color: Colors.black,
-                          ),
-                        )
-                      ],
-                    ),
+                      ),
+                      Text(
+                        '\$12',
+                        style: TextStyle(
+                          color: Colors.black,
+                        ),
+                      )
+                    ],
                   ),
                 ),
-              ],
-            ),
+              ),
+              const SizedBox(height: 10.0),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 16.0,
+                      horizontal: 36.0,
+                    ),
+                    decoration: BoxDecoration(
+                        color: bBlack,
+                        border: Border.all(
+                          color: fixScreenBorder,
+                          width: 1.0,
+                        ),
+                        borderRadius: BorderRadius.circular(10.0)),
+                    child: const Text(
+                      'Order Repair',
+                      style: TextStyle(color: text1),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 16.0,
+                      horizontal: 36.0,
+                    ),
+                    decoration: BoxDecoration(
+                        color: Colors.white,
+                        border: Border.all(
+                          color: fixScreenBorder,
+                          width: 1.0,
+                        ),
+                        borderRadius: BorderRadius.circular(10.0)),
+                    child: const Text(
+                      'Order Setup',
+                      style: TextStyle(color: bBlack),
+                    ),
+                  ),
+                ],
+              )
+            ],
           ),
-        ],
-      ),
+        ),
+      ],
     );
   }
 }
