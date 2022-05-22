@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:repair_home/src/shared/constants.dart';
+import 'package:repair_home/src/shared/widgets.dart';
 
 class Cart extends StatefulWidget {
+  static var cartTilesList;
+  static var cartSubTilesList;
+
   const Cart({Key? key}) : super(key: key);
 
   @override
@@ -9,359 +13,136 @@ class Cart extends StatefulWidget {
 }
 
 class _CartState extends State<Cart> {
+  final List cartTilesList = [
+    CartItems(name: 'Microwave', icon: 'microwave', service: '2', price: 102),
+    CartItems(name: 'Fridge', icon: 'fridge', service: '2', price: 70),
+    CartItems(name: 'Washer', icon: 'washer', service: '1', price: 135),
+    CartItems(name: 'Computer', icon: 'computer', service: '1', price: 30),
+  ];
+
+  bool clicked = false;
+
   @override
   Widget build(BuildContext context) {
+    Size _size = MediaQuery.of(context).size;
+
     return Scaffold(
-      backgroundColor: lightWhite,
+      backgroundColor: backgroundMain,
       appBar: AppBar(
-        leading: const Icon(
-          Icons.arrow_back_ios,
-          size: 14.0,
-          color: Colors.black,
+        leading: IconButton(
+          icon: const Icon(Icons.arrow_back_ios),
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          iconSize: 16.0,
+          color: bBlack,
+          hoverColor: Colors.transparent,
         ),
         elevation: 0.0,
         title: const Text(
           'Cart',
           style: TextStyle(
-              color: Colors.black, fontWeight: FontWeight.bold, fontSize: 16.0),
+            color: bBlack,
+            fontWeight: FontWeight.bold,
+            fontSize: 16.0,
+          ),
         ),
         centerTitle: true,
-        backgroundColor: lightWhite,
+        backgroundColor: Colors.transparent,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      body: SafeArea(
+          child: Stack(
         children: [
-          Container(
-            padding:
-                const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
-            child: Column(
-              children: [
-                Container(
-                  padding: const EdgeInsets.all(8.0),
-                  decoration: BoxDecoration(
-                      color: priColor3,
-                      borderRadius: BorderRadius.circular(10.0),
-                      boxShadow: const [
-                        BoxShadow(
-                          color: Colors.grey,
-                          blurRadius: 1.0,
-                          offset: Offset(1, 1),
+          Image.asset(
+            'assets/watermarks/cart_logo.png',
+            height: _size.height * 0.35,
+            color: blueBlue.withOpacity(0.15),
+          ),
+          _cartBody(_size),
+        ],
+      )),
+    );
+  }
+
+  Widget _cartBody(Size size) {
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+        child: Column(
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.75,
+              child: ListView.builder(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: (() {
+                      setState(() {
+                        clicked = !clicked;
+                      });
+                    }),
+                    child: Column(
+                      children: [
+                        CartTiles(
+                          cartItems: cartTilesList[index],
+                          clicked: clicked,
+                          cartSubTilesListName: cartSubTilesList[index].name,
+                          cartSubTilesListPrice: cartSubTilesList[index].price,
                         ),
-                      ]),
-                  child: Row(
-                    children: [
-                      Expanded(
-                        flex: 1,
-                        child: Container(
-                          padding: const EdgeInsets.symmetric(vertical: 4.0),
-                          decoration: BoxDecoration(
-                            color: priColor2,
-                            borderRadius: BorderRadius.circular(10.0),
-                          ),
-                          child: Image.asset('assets/icons/microwave.png'),
-                        ),
-                      ),
-                      Expanded(
-                        flex: 8,
-                        child: Padding(
-                          padding:
-                              const EdgeInsets.fromLTRB(20.0, 0.0, 0.0, 0.0),
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: const [
-                              Text(
-                                'Fix Microwave',
-                                style: TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 12.0),
-                              ),
-                              Text(
-                                'Kitchen',
-                                style: TextStyle(
-                                    color: textColor2, fontSize: 12.0),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      const Expanded(
-                        flex: 1,
-                        child: Icon(
-                          Icons.arrow_forward_ios,
-                          size: 18.0,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  padding: const EdgeInsets.all(8.0),
-                  decoration: BoxDecoration(
-                    color: priColor3,
-                    borderRadius: BorderRadius.circular(3.0),
-                  ),
-                  child: Row(
+                      ],
+                    ),
+                  );
+                },
+                itemCount: cartTilesList.length,
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: const [
                       Expanded(
+                        flex: 3,
+                        child: Text(
+                          'Total price',
+                          style: TextStyle(color: text2),
+                        ),
+                      ),
+                      Expanded(
                         flex: 1,
-                        child: Icon(
-                          Icons.arrow_circle_right,
-                          color: lightRed,
-                          size: 18.0,
-                        ),
-                      ),
-                      Expanded(
-                        flex: 8,
-                        child: Padding(
-                          padding: EdgeInsets.fromLTRB(20.0, 0.0, 0.0, 0.0),
-                          child: Text(
-                            'Set up Microwave',
+                        child: Text('\$302',
                             style: TextStyle(
-                                fontWeight: FontWeight.bold, fontSize: 12.0),
-                          ),
-                        ),
-                      ),
-                      Expanded(
-                        flex: 2,
-                        child: Text('\$70'),
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black)),
                       ),
                     ],
                   ),
-                ),
-                const SizedBox(
-                  height: 10.0,
-                ),
-                InkWell(
-                  onTap: () {},
-                  child: Container(
-                    padding: const EdgeInsets.all(8.0),
-                    decoration: BoxDecoration(
-                      color: priColor3,
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(vertical: 4.0),
-                            decoration: BoxDecoration(
-                              color: priColor2,
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            child: Image.asset('assets/icons/fridge.png'),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          padding: const EdgeInsets.all(10.0),
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: bBlack,
+                            borderRadius: BorderRadius.circular(10.0),
                           ),
-                        ),
-                        Expanded(
-                          flex: 8,
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.fromLTRB(20.0, 0.0, 0.0, 0.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const [
-                                Text(
-                                  'Fix Fridge',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 12.0),
-                                ),
-                                Text(
-                                  '2 Service',
-                                  style: TextStyle(
-                                      color: textColor2, fontSize: 12.0),
-                                ),
-                              ],
-                            ),
+                          child: const Text(
+                            'Make an order',
+                            style: TextStyle(color: text1),
                           ),
-                        ),
-                        const Expanded(
-                          flex: 2,
-                          child: Text('\$70'),
-                        ),
-                        const Expanded(
-                          flex: 1,
-                          child: Icon(
-                            Icons.arrow_forward_ios,
-                            size: 18.0,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 10.0,
-                ),
-                InkWell(
-                  onTap: () {},
-                  child: Container(
-                    padding: const EdgeInsets.all(8.0),
-                    decoration: BoxDecoration(
-                      color: priColor3,
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(vertical: 4.0),
-                            decoration: BoxDecoration(
-                              color: priColor2,
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            child: Image.asset('assets/icons/washer.png'),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 8,
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.fromLTRB(20.0, 0.0, 0.0, 0.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const [
-                                Text(
-                                  'Fix Washer',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 12.0),
-                                ),
-                                Text(
-                                  '1 Service',
-                                  style: TextStyle(
-                                      color: textColor2, fontSize: 12.0),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        const Expanded(
-                          flex: 2,
-                          child: Text('\$135'),
-                        ),
-                        const Expanded(
-                          flex: 1,
-                          child: Icon(
-                            Icons.arrow_forward_ios,
-                            size: 18.0,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-                const SizedBox(
-                  height: 10.0,
-                ),
-                InkWell(
-                  onTap: () {},
-                  child: Container(
-                    padding: const EdgeInsets.all(8.0),
-                    decoration: BoxDecoration(
-                      color: priColor3,
-                      borderRadius: BorderRadius.circular(10.0),
-                    ),
-                    child: Row(
-                      children: [
-                        Expanded(
-                          flex: 1,
-                          child: Container(
-                            padding: const EdgeInsets.symmetric(vertical: 4.0),
-                            decoration: BoxDecoration(
-                              color: priColor2,
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            child: Image.asset('assets/icons/computer.png'),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 8,
-                          child: Padding(
-                            padding:
-                                const EdgeInsets.fromLTRB(20.0, 0.0, 0.0, 0.0),
-                            child: Column(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: const [
-                                Text(
-                                  'Fix Computer',
-                                  style: TextStyle(
-                                      fontWeight: FontWeight.bold,
-                                      fontSize: 12.0),
-                                ),
-                                Text(
-                                  '1 Service',
-                                  style: TextStyle(
-                                      color: textColor2, fontSize: 12.0),
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                        const Expanded(
-                          flex: 2,
-                          child: Text('\$30'),
-                        ),
-                        const Expanded(
-                          flex: 1,
-                          child: Icon(
-                            Icons.arrow_forward_ios,
-                            size: 18.0,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            padding:
-                const EdgeInsets.symmetric(vertical: 32.0, horizontal: 24.0),
-            child: Column(
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: const [
-                    Expanded(
-                      flex: 3,
-                      child: Text('Total price'),
-                    ),
-                    Expanded(
-                      flex: 1,
-                      child: Text('\$302',
-                          style: TextStyle(fontWeight: FontWeight.bold)),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Expanded(
-                      child: Container(
-                        padding: const EdgeInsets.all(10.0),
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                          color: Colors.black,
-                          borderRadius: BorderRadius.circular(10.0),
-                        ),
-                        child: const Text(
-                          'Make an order',
-                          style: TextStyle(color: Colors.white),
                         ),
                       ),
-                    ),
-                  ],
-                ),
-              ],
+                    ],
+                  ),
+                ],
+              ),
             ),
-          ),
-        ],
+          ],
+        ),
       ),
     );
   }
