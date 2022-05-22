@@ -14,27 +14,18 @@ class Cart extends StatefulWidget {
 
 class _CartState extends State<Cart> {
   final List cartTilesList = [
-    const CartTiles(
-        name: 'Microwave', icon: 'microwave', service: '2', price: 102),
-    const CartTiles(name: 'Fridge', icon: 'fridge', service: '2', price: 70),
-    const CartTiles(name: 'Washer', icon: 'washer', service: '1', price: 135),
-    const CartTiles(
-        name: 'Computer', icon: 'computer', service: '1', price: 30),
+    CartItems(name: 'Microwave', icon: 'microwave', service: '2', price: 102),
+    CartItems(name: 'Fridge', icon: 'fridge', service: '2', price: 70),
+    CartItems(name: 'Washer', icon: 'washer', service: '1', price: 135),
+    CartItems(name: 'Computer', icon: 'computer', service: '1', price: 30),
   ];
 
-  final List cartSubTilesList = [
-    const CartSubTiles(
-      name: 'Set up Microwave',
-      price: 22,
-    ),
-    const CartSubTiles(
-      name: ' Repair Microwave',
-      price: 80,
-    ),
-  ];
+  bool clicked = false;
 
   @override
   Widget build(BuildContext context) {
+    Size _size = MediaQuery.of(context).size;
+
     return Scaffold(
       backgroundColor: backgroundMain,
       appBar: AppBar(
@@ -60,77 +51,98 @@ class _CartState extends State<Cart> {
         backgroundColor: Colors.transparent,
       ),
       body: SafeArea(
-        child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 24.0),
-          child: Column(
-            children: [
-              SizedBox(
-                height: MediaQuery.of(context).size.height * 0.75,
-                child: ListView.builder(
-                  scrollDirection: Axis.vertical,
-                  shrinkWrap: true,
-                  itemBuilder: (context, index) {
-                    return CartTiles(
-                        name: cartTilesList[index].name,
-                        icon: cartTilesList[index].icon,
-                        service: cartTilesList[index].service,
-                        price: cartTilesList[index].price);
-                  },
-                  itemCount: cartTilesList.length,
-                ),
-              ),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 24.0),
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: const [
-                        Expanded(
-                          flex: 3,
-                          child: Text(
-                            'Total price',
-                            style: TextStyle(color: text2),
-                          ),
-                        ),
-                        Expanded(
-                          flex: 1,
-                          child: Text('\$302',
-                              style: TextStyle(
-                                  fontWeight: FontWeight.bold,
-                                  color: Colors.black)),
-                        ),
-                      ],
-                    ),
-                    Row(
-                      children: [
-                        Expanded(
-                          child: Container(
-                            padding: const EdgeInsets.all(10.0),
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              color: bBlack,
-                              borderRadius: BorderRadius.circular(10.0),
-                            ),
-                            child: const Text(
-                              'Make an order',
-                              style: TextStyle(color: text1),
-                            ),
-                          ),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
-              ),
-            ],
+          child: Stack(
+        children: [
+          Image.asset(
+            'assets/watermarks/cart_logo.png',
+            height: _size.height * 0.35,
+            color: blueBlue.withOpacity(0.15),
           ),
-        ),
+          _cartBody(_size),
+        ],
+      )),
+    );
+  }
 
-        // Container(
-        //   padding: const EdgeInsets.symmetric(vertical: 16.0, horizontal: 24.0),
-        //   // color: Colors.pink.shade300,
-        // ),
+  Widget _cartBody(Size size) {
+    return SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 24.0),
+        child: Column(
+          children: [
+            SizedBox(
+              height: MediaQuery.of(context).size.height * 0.75,
+              child: ListView.builder(
+                scrollDirection: Axis.vertical,
+                shrinkWrap: true,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: (() {
+                      setState(() {
+                        clicked = !clicked;
+                      });
+                    }),
+                    child: Column(
+                      children: [
+                        CartTiles(
+                          cartItems: cartTilesList[index],
+                          clicked: clicked,
+                          cartSubTilesListName: cartSubTilesList[index].name,
+                          cartSubTilesListPrice: cartSubTilesList[index].price,
+                        ),
+                      ],
+                    ),
+                  );
+                },
+                itemCount: cartTilesList.length,
+              ),
+            ),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 24.0),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: const [
+                      Expanded(
+                        flex: 3,
+                        child: Text(
+                          'Total price',
+                          style: TextStyle(color: text2),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Text('\$302',
+                            style: TextStyle(
+                                fontWeight: FontWeight.bold,
+                                color: Colors.black)),
+                      ),
+                    ],
+                  ),
+                  Row(
+                    children: [
+                      Expanded(
+                        child: Container(
+                          padding: const EdgeInsets.all(10.0),
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            color: bBlack,
+                            borderRadius: BorderRadius.circular(10.0),
+                          ),
+                          child: const Text(
+                            'Make an order',
+                            style: TextStyle(color: text1),
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
