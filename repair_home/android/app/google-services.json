@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "447990317149",
+    "project_id": "repair-home-a113a",
+    "storage_bucket": "repair-home-a113a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:447990317149:android:56712d27c35eca03bf4db4",
+        "android_client_info": {
+          "package_name": "com.example.repair_home"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "447990317149-sktvt5qlvg7fc3hl00ibgv9acnifl89i.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAViY9GnHT3qVmDRxi6b0hEli3iK2XX8P0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "447990317149-sktvt5qlvg7fc3hl00ibgv9acnifl89i.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
