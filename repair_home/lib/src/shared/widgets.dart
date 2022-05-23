@@ -60,7 +60,7 @@ class CartTiles extends StatelessWidget {
                       Text(
                         '${cartItems.service} Service',
                         style:
-                            const TextStyle(color: textColor2, fontSize: 12.0),
+                            const TextStyle(color: text2, fontSize: 12.0),
                       ),
                     ],
                   ),

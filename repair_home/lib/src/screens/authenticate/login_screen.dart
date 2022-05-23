@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:repair_home/src/screens/authenticate/signup_screen.dart';
 import 'package:repair_home/src/screens/splashscreen.dart';
+import 'package:repair_home/src/services/auth.dart';
 import 'package:repair_home/src/shared/constants.dart';
 import 'package:repair_home/src/shared/decrations.dart';
-import 'package:repair_home/src/shared/widgets.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({Key? key}) : super(key: key);
@@ -13,6 +13,12 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final AuthService _auth = AuthService();
+  final _formKey = GlobalKey<FormState>();
+
+  String email = '';
+  String password = '';
+  String error = '';
   @override
   Widget build(BuildContext context) {
     Size _size = MediaQuery.of(context).size;
@@ -36,6 +42,7 @@ class _LoginPageState extends State<LoginPage> {
   Widget _signinBody(Size _size) {
     return SingleChildScrollView(
       child: Container(
+          key: _formKey,
           padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 32.0),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -65,6 +72,15 @@ class _LoginPageState extends State<LoginPage> {
                 decoration: customBoxDecor,
                 child: TextFormField(
                   decoration: inputTextDecoration.copyWith(hintText: 'Email'),
+                  validator: ((value) {
+                    if (value!.isEmpty) {
+                      return 'Enter email';
+                    }
+                    return null;
+                  }),
+                  onChanged: (value) {
+                    setState(() => email = value);
+                  },
                 ),
               ),
               const SizedBox(
@@ -74,9 +90,19 @@ class _LoginPageState extends State<LoginPage> {
                 height: 45.0,
                 decoration: customBoxDecor,
                 child: TextFormField(
-                    decoration:
-                        inputTextDecoration.copyWith(hintText: 'Password'),
-                    obscureText: true),
+                  decoration:
+                      inputTextDecoration.copyWith(hintText: 'Password'),
+                  obscureText: true,
+                  validator: (value) {
+                    if (value!.length < 6) {
+                      return 'Enter password with more than 6 characters';
+                    }
+                    return null;
+                  },
+                  onChanged: (value) {
+                    setState(() => password = value);
+                  },
+                ),
               ),
               const SizedBox(
                 height: 10.0,
@@ -98,13 +124,24 @@ class _LoginPageState extends State<LoginPage> {
                         ],
                       ),
                       child: TextButton(
-                        onPressed: () {
-                          Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                              builder: ((context) => const SignupPage()),
-                            ),
-                          );
+                        onPressed: () async {
+                          if (_formKey.currentState!.validate()) {
+                            dynamic result = _auth.signInWithEmailAndPassword(
+                                email, password);
+                            if (result == null) {
+                              setState(() => error = 'Something went wrong');
+                            }
+                            ;
+                            print(result);
+                          }
+                          ;
+
+                          // Navigator.push(
+                          //   context,
+                          //   MaterialPageRoute(
+                          //     builder: ((context) => const SignupPage()),
+                          //   ),
+                          // );
                         },
                         child: const Text(
                           'Sign in',
@@ -118,6 +155,10 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                 ],
               ),
+              const SizedBox(
+                height: 10.0,
+              ),
+              Text(error, style: const TextStyle(color: Colors.red)),
               const SizedBox(
                 height: 40.0,
               ),
